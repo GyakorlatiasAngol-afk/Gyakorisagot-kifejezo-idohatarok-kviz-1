@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Adverbs of Frequency Quiz | GyakorlatiasAngol.hu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1b1238, #2d1b63, #14101f);
+      color: #fff;
+      min-height: 100svh;
+      min-height: 100dvh;
+      padding: max(6px, env(safe-area-inset-top)) 8px max(6px, env(safe-area-inset-bottom));
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0;
+    }
+
+    .logo {
+      width: 100%;
+      max-width: 90px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+    }
+
+    .quiz-box {
+      width: 100%;
+      margin: 0 auto;
+      max-width: 430px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      padding: 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+    }
+
+    h1, h2, p {
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.65rem, 7vw, 2.25rem);
+      line-height: 1.1;
+    }
+
+    h2 {
+      color: #8ef0c0;
+      font-size: clamp(0.82rem, 3.8vw, 1rem);
+      margin: 0 0 10px;
+      line-height: 1.25;
+    }
+
+    .brand {
+      color: #ffd56a;
+      font-weight: bold;
+      margin: 2px 0 8px;
+      font-size: 0.98rem;
+    }
+
+    .progress {
+      text-align: center;
+      margin: 6px 0;
+      font-weight: bold;
+      color: #ffd56a;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 7px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #8ef0c0;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .question {
+      background: rgba(255,255,255,0.11);
+      padding: 12px;
+      border-radius: 20px;
+      border-left: 6px solid #8ef0c0;
+    }
+
+    .question h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1rem, 4.5vw, 1.2rem);
+      line-height: 1.35;
+    }
+
+    button.answer {
+      display: block;
+      width: 100%;
+      margin: 6px 0;
+      padding: 11px 10px;
+      border: none;
+      border-radius: 16px;
+      background: #f2f2f2;
+      color: #1b1238;
+      font-size: 1.05rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      touch-action: manipulation;
+    }
+
+    button.answer:hover {
+      background: #fff4c2;
+    }
+
+    button.answer:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    button.correct {
+      background: #42d392 !important;
+      color: #062b18;
+    }
+
+    button.wrong {
+      background: #ff6b8a !important;
+      color: #fff;
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-weight: bold;
+      min-height: 34px;
+      line-height: 1.4;
+      font-size: 0.92rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .main-btn {
+      flex: 1;
+      background: #ffd56a;
+      color: #1b1238;
+      border: none;
+      padding: 10px 10px;
+      border-radius: 16px;
+      font-size: 0.92rem;
+      font-weight: bold;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .main-btn.secondary {
+      background: rgba(255,255,255,0.16);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .result {
+      text-align: center;
+      font-size: clamp(1.25rem, 5.8vw, 1.7rem);
+      font-weight: bold;
+      margin-top: 10px;
+      color: #8ef0c0;
+      line-height: 1.35;
+    }
+
+    .note {
+      background: rgba(0,0,0,0.25);
+      border-radius: 16px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      line-height: 1.25;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-height: 760px) {
+      h2 {
+        margin-bottom: 4px;
+      }
+
+      .brand {
+        display: none;
+      }
+
+      .progress {
+        margin: 4px 0;
+      }
+
+      .progress-bar {
+        margin-bottom: 6px;
+      }
+
+      .controls {
+        margin-top: 8px;
+      }
+
+      .logo {
+        max-width: 72px;
+      }
+
+      .quiz-box {
+        padding: 10px;
+      }
+
+      .question {
+        padding: 10px;
+      }
+
+      .question h3 {
+        font-size: 0.92rem;
+      }
+
+      button.answer {
+        padding: 9px 8px;
+        font-size: 0.92rem;
+      }
+
+      .main-btn {
+        padding: 9px 8px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      body {
+        padding: 10px;
+      }
+
+      .quiz-box {
+        padding: 16px;
+        border-radius: 20px;
+      }
+
+      .question {
+        padding: 15px;
+      }
+
+      button.answer,
+      .main-btn {
+        font-size: 0.98rem;
+        padding: 13px 10px;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="quiz-box">
+    <div class="logo-wrap">
+      <img src="data:image/webp;base64,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" alt="Gyakorlatias Angol" class="logo" />
+    </div>
+
+    <h2>Adverbs of Frequency + Simple Present</h2>
+    <p class="brand">GyakorlatiasAngol.hu</p>
+
+    <div class="progress" id="progressText"></div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div id="quiz"></div>
+
+    <div class="controls">
+      <button class="main-btn secondary" onclick="restartQuiz()">Újrakezdés</button>
+      <button class="main-btn" id="nextBtn" onclick="nextQuestion()" disabled>Következő</button>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <div class="note" style="display:none;">
+      💡 Emlékezz:<br><br>
+      Normál igéknél a gyakoriságot kifejező szó általában <b>az ige előtt</b> áll:<br>
+      <b>I always drink tea.</b><br><br>
+      Az <b>am/is/are</b> után tesszük a gyakoriságot kifejező szót:<br>
+      <b>She is always happy.</b>
+    </div>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        text: "I ______ drink tea every morning.",
+        answers: ["never", "always", "are"],
+        correct: "always",
+        sentence: "I always drink tea every morning."
+      },
+      {
+        text: "She ______ goes to school by bus.",
+        answers: ["often", "am", "drink"],
+        correct: "often",
+        sentence: "She often goes to school by bus."
+      },
+      {
+        text: "We ______ watch TV after dinner.",
+        answers: ["usually", "are", "eats"],
+        correct: "usually",
+        sentence: "We usually watch TV after dinner."
+      },
+      {
+        text: "He is ______ tired after work.",
+        answers: ["often", "play", "do"],
+        correct: "often",
+        sentence: "He is often tired after work."
+      },
+      {
+        text: "They ______ play football on Sunday.",
+        answers: ["sometimes", "is", "drinks"],
+        correct: "sometimes",
+        sentence: "They sometimes play football on Sunday."
+      },
+      {
+        text: "My father ______ drinks coffee at night. He sleeps well.",
+        answers: ["never", "always", "are"],
+        correct: "never",
+        sentence: "My father never drinks coffee at night."
+      },
+      {
+        text: "I am ______ happy on holiday.",
+        answers: ["usually", "eat", "does"],
+        correct: "usually",
+        sentence: "I am usually happy on holiday."
+      },
+      {
+        text: "Tom ______ eats breakfast before school.",
+        answers: ["always", "do", "am"],
+        correct: "always",
+        sentence: "Tom always eats breakfast before school."
+      },
+      {
+        text: "We are ______ late for class.",
+        answers: ["sometimes", "drink", "eats"],
+        correct: "sometimes",
+        sentence: "We are sometimes late for class."
+      },
+      {
+        text: "She ______ watches TV in the evening.",
+        answers: ["often", "are", "play"],
+        correct: "often",
+        sentence: "She often watches TV in the evening."
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answeredCurrent = false;
+
+    function loadQuestion() {
+      const quiz = document.getElementById("quiz");
+      const result = document.getElementById("result");
+      const nextBtn = document.getElementById("nextBtn");
+      const progressText = document.getElementById("progressText");
+      const progressFill = document.getElementById("progressFill");
+
+      result.innerHTML = "";
+      answeredCurrent = false;
+      nextBtn.disabled = true;
+      nextBtn.textContent = currentQuestion === questions.length - 1 ? "Eredmény" : "Következő";
+
+      const progressPercent = (currentQuestion / questions.length) * 100;
+      progressText.textContent = `${currentQuestion + 1}. kérdés / ${questions.length}`;
+      progressFill.style.width = `${progressPercent}%`;
+
+      const q = questions[currentQuestion];
+      quiz.innerHTML = "";
+
+      const div = document.createElement("section");
+      div.className = "question";
+      div.innerHTML = `<h3>${currentQuestion + 1}. ${q.text}</h3>`;
+
+      q.answers.forEach(answer => {
+        const btn = document.createElement("button");
+        btn.className = "answer";
+        btn.textContent = answer;
+        btn.onclick = () => checkAnswer(btn, answer, q.correct, q.sentence, div);
+        div.appendChild(btn);
+      });
+
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+      div.appendChild(feedback);
+      quiz.appendChild(div);
+    }
+
+    function checkAnswer(button, selected, correct, sentence, questionDiv) {
+      if (answeredCurrent) return;
+
+      const buttons = questionDiv.querySelectorAll("button.answer");
+      const feedback = questionDiv.querySelector(".feedback");
+      const nextBtn = document.getElementById("nextBtn");
+
+      answeredCurrent = true;
+      nextBtn.disabled = false;
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === correct) btn.classList.add("correct");
+      });
+
+      if (selected === correct) {
+        button.classList.add("correct");
+        feedback.innerHTML = `✅ Helyes!<br>${sentence}`;
+        score++;
+      } else {
+        button.classList.add("wrong");
+        feedback.innerHTML = `❌ Ez most nem jó.<br>A helyes mondat: ${sentence}`;
+      }
+    }
+
+    function nextQuestion() {
+      if (!answeredCurrent) return;
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      const quiz = document.getElementById("quiz");
+      const result = document.getElementById("result");
+      const nextBtn = document.getElementById("nextBtn");
+      const progressText = document.getElementById("progressText");
+      const progressFill = document.getElementById("progressFill");
+      let message = "";
+
+      if (score >= 9) message = "Kiváló munka! 🎉";
+      else if (score >= 7) message = "Nagyon ügyes! 😊";
+      else if (score >= 5) message = "Szép munka! 👍";
+      else message = "Gyakorolj még egy kicsit! 💪";
+
+      quiz.innerHTML = "";
+      nextBtn.classList.add("hidden");
+      progressText.textContent = "Kvíz kész!";
+      progressFill.style.width = "100%";
+      result.innerHTML = `Pontszámod: ${score}/${questions.length}<br>${message}`;
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      answeredCurrent = false;
+      document.getElementById("nextBtn").classList.remove("hidden");
+      loadQuestion();
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
